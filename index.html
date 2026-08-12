@@ -3,86 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Duzzie 🤍</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#fff4f7,#f4edff);
+  min-height:100vh;
+  font-family:Arial, sans-serif;
   color:#3d3036;
-  text-align:center;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,190,210,.35),transparent 25%),
+    radial-gradient(circle at 80% 80%,rgba(205,190,255,.35),transparent 25%),
+    linear-gradient(135deg,#fff5f8,#f6f0ff);
+  overflow-x:hidden;
+}
+
+/* Floating lights */
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  filter:blur(70px);
+  opacity:.35;
+  pointer-events:none;
+  z-index:-1;
+}
+
+body::before{
+  background:#ffb8cb;
+  top:-100px;
+  left:-80px;
+}
+
+body::after{
+  background:#c8b8ff;
+  bottom:-100px;
+  right:-80px;
 }
 
 .page{
   min-height:100vh;
   display:none;
-  padding:35px 18px;
+  padding:35px 16px;
   justify-content:center;
   align-items:center;
   flex-direction:column;
+  animation:pageIn .7s ease;
 }
 
-.page.active{display:flex}
+.page.active{
+  display:flex;
+}
+
+@keyframes pageIn{
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
 .card{
   width:min(900px,96%);
-  background:rgba(255,255,255,.88);
-  padding:30px 22px;
-  border-radius:30px;
-  box-shadow:0 15px 45px rgba(0,0,0,.09);
+  padding:34px 23px;
+  border-radius:32px;
+  background:rgba(255,255,255,.84);
+  backdrop-filter:blur(12px);
+  box-shadow:
+    0 20px 60px rgba(80,50,70,.12),
+    inset 0 1px 0 rgba(255,255,255,.8);
+  border:1px solid rgba(255,255,255,.7);
 }
 
-h1{font-size:38px;margin:12px 0}
-h2{font-size:29px}
-p{font-size:18px;line-height:1.9}
+h1{
+  font-size:38px;
+  margin:12px 0;
+}
+
+h2{
+  font-size:29px;
+}
+
+p{
+  font-size:18px;
+  line-height:1.9;
+}
 
 .heart{
   font-size:65px;
-  animation:pulse 1.5s infinite;
+  animation:pulse 1.8s infinite;
 }
 
 @keyframes pulse{
-  50%{transform:scale(1.1)}
-}
-
-.birthday{
-  font-size:21px;
-  font-weight:bold;
-  margin:18px 0;
+  0%,100%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.09);
+  }
 }
 
 .love{
-  font-size:19px;
+  font-size:20px;
   font-style:italic;
+  margin:12px 0;
+  animation:fadeText 1.8s ease;
+}
+
+.birthday{
+  font-size:22px;
+  font-weight:bold;
+  margin:18px 0;
+  animation:fadeText 2.2s ease;
+}
+
+@keyframes fadeText{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
 }
 
 input{
-  width:min(340px,90%);
-  padding:15px;
-  border:1px solid #ddd;
-  border-radius:16px;
+  width:min(350px,90%);
+  padding:16px;
+  margin-top:12px;
+  border:1px solid #e4d7dc;
+  border-radius:18px;
   text-align:center;
   font-size:17px;
   outline:none;
-  margin-top:15px;
+  background:white;
+  transition:.3s;
+}
+
+input:focus{
+  box-shadow:0 0 0 4px rgba(215,139,163,.15);
+  border-color:#d78ba3;
 }
 
 button{
   border:0;
-  background:#d78ba3;
+  background:linear-gradient(135deg,#d78ba3,#b97aa0);
   color:white;
-  padding:14px 27px;
+  padding:14px 30px;
   border-radius:30px;
   font-size:17px;
   cursor:pointer;
   margin-top:20px;
   transition:.3s;
+  box-shadow:0 8px 20px rgba(180,110,140,.2);
 }
 
-button:hover{transform:scale(1.05)}
+button:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 12px 25px rgba(180,110,140,.28);
+}
 
 .error{
   color:#c34d65;
@@ -90,42 +183,102 @@ button:hover{transform:scale(1.05)}
 }
 
 .counter{
-  font-size:23px;
+  font-size:21px;
   font-weight:bold;
-  margin:22px 0;
+  margin:24px 0;
   direction:rtl;
+  line-height:1.8;
 }
 
+.small{
+  opacity:.6;
+  font-size:14px;
+}
+
+/* Timeline */
+
 .timeline{
+  position:relative;
+  margin-top:30px;
+  padding-right:15px;
   text-align:right;
-  margin-top:20px;
+}
+
+.timeline::before{
+  content:"";
+  position:absolute;
+  right:5px;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:linear-gradient(#d78ba3,#c8b8ff);
+  border-radius:10px;
 }
 
 .event{
-  background:white;
-  padding:18px;
-  margin:15px 0;
-  border-radius:20px;
-  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  position:relative;
+  background:rgba(255,255,255,.92);
+  padding:20px 22px;
+  margin:22px 0;
+  margin-right:25px;
+  border-radius:22px;
+  box-shadow:0 8px 25px rgba(0,0,0,.07);
 }
 
-.event span{font-size:27px}
+.event::before{
+  content:"";
+  position:absolute;
+  right:-32px;
+  top:28px;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#d78ba3;
+  box-shadow:0 0 0 5px rgba(215,139,163,.16);
+}
+
+.event span{
+  font-size:27px;
+}
+
+.event h3{
+  margin:10px 0 5px;
+}
+
+.date{
+  font-size:14px;
+  color:#a36d82;
+  font-weight:bold;
+}
+
+/* Photos */
 
 .photos{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:22px;
-  margin-top:25px;
+  gap:25px;
+  margin-top:28px;
 }
 
 .photo{
   background:white;
   padding:10px 10px 20px;
-  box-shadow:0 8px 22px rgba(0,0,0,.13);
+  box-shadow:0 10px 25px rgba(0,0,0,.14);
   transform:rotate(-2deg);
+  transition:.35s;
 }
 
-.photo:nth-child(even){transform:rotate(2deg)}
+.photo:nth-child(even){
+  transform:rotate(2deg);
+}
+
+.photo:nth-child(3n){
+  transform:rotate(-1deg);
+}
+
+.photo:hover{
+  transform:translateY(-7px) rotate(0deg) scale(1.02);
+}
 
 .photo img{
   width:100%;
@@ -136,33 +289,102 @@ button:hover{transform:scale(1.05)}
 
 .photo p{
   font-size:14px;
-  margin:12px 3px 0;
+  line-height:1.7;
+  margin:12px 4px 0;
 }
 
+/* Facts */
+
 .fact{
-  background:white;
-  padding:17px;
-  margin:12px 0;
-  border-radius:18px;
-  line-height:1.8;
+  background:rgba(255,255,255,.92);
+  padding:18px;
+  margin:13px 0;
+  border-radius:20px;
+  line-height:1.9;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+  transition:.3s;
 }
+
+.fact:hover{
+  transform:translateX(-4px);
+}
+
+/* Ending */
 
 .final-message{
   font-size:20px;
   line-height:2;
 }
 
-.small{
-  opacity:.65;
-  font-size:14px;
+#surpriseText{
+  font-size:20px;
+  line-height:2;
+  margin-top:25px;
+  animation:fadeText 1s ease;
+}
+
+/* Restart */
+
+.restart{
+  background:transparent;
+  color:#9d657b;
+  box-shadow:none;
+  border:1px solid #dcb8c5;
+  font-size:15px;
+}
+
+.restart:hover{
+  background:#fff;
+}
+
+/* Mobile */
+
+@media(max-width:600px){
+
+  .card{
+    padding:27px 16px;
+    border-radius:27px;
+  }
+
+  h1{
+    font-size:29px;
+  }
+
+  h2{
+    font-size:25px;
+  }
+
+  p{
+    font-size:16px;
+  }
+
+  .photos{
+    grid-template-columns:repeat(2,1fr);
+    gap:17px;
+  }
+
+  .photo img{
+    height:155px;
+  }
+
+  .photo p{
+    font-size:12px;
+  }
+
+  .event{
+    margin-right:22px;
+    padding:17px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+
 <!-- PASSWORD -->
 <section class="page active" id="passwordPage">
+
   <div class="card">
 
     <div class="heart">🤍</div>
@@ -177,7 +399,9 @@ button:hover{transform:scale(1.05)}
       Happy Birthday 🎂❤️
     </div>
 
-    <p>في مكان صغير معمول مخصوص ليكي...</p>
+    <p>
+      في مكان صغير معمول مخصوص ليكي...
+    </p>
 
     <input
       id="password"
@@ -188,21 +412,27 @@ button:hover{transform:scale(1.05)}
 
     <br>
 
-    <button onclick="checkPassword()">Open 🤍</button>
+    <button onclick="checkPassword()">
+      Open 🤍
+    </button>
 
     <div id="error" class="error"></div>
 
   </div>
+
 </section>
 
 
 <!-- START -->
 <section class="page" id="startPage">
+
   <div class="card">
 
     <div class="heart">🎁</div>
 
-    <h1>في حاجة صغيرة عملتها مخصوص ليكي...</h1>
+    <h1>
+      في حاجة صغيرة عملتها مخصوص ليكي...
+    </h1>
 
     <p>
       مش عارف هتضحكي ولا هتستغربي 😂
@@ -215,16 +445,20 @@ button:hover{transform:scale(1.05)}
     </button>
 
   </div>
+
 </section>
 
 
 <!-- INTRO -->
 <section class="page" id="introPage">
+
   <div class="card">
 
     <div class="heart">🤍</div>
 
-    <h2>لو وصلتي لهنا...</h2>
+    <h2>
+      لو وصلتي لهنا...
+    </h2>
 
     <p>
       يبقى عندي شوية حاجات عايز أفتكرك بيها.
@@ -239,77 +473,138 @@ button:hover{transform:scale(1.05)}
     </p>
 
     <button onclick="showPage('timelinePage')">
-      Our Timeline 🕰️
+      Next →
     </button>
 
   </div>
+
 </section>
 
 
 <!-- TIMELINE -->
 <section class="page" id="timelinePage">
+
   <div class="card">
 
-    <h1>Our Timeline 🕰️</h1>
+    <h1>
+      Our Timeline 🕰️
+    </h1>
 
     <div class="timeline">
 
+
+      <!-- EVENT 1 -->
+
       <div class="event">
+
         <span>📅</span>
-        <h3>أول مرة اتكلمنا</h3>
+
+        <div class="date">
+          20/2/2026
+        </div>
+
+        <h3>
+          أول مرة اتكلمنا
+        </h3>
+
         <p>
           يمكن وقتها مكنّاش نعرف إن الكلام ده
           هيبقى ذكرى بعدين.
         </p>
+
       </div>
 
+
+      <!-- EVENT 2 -->
+
       <div class="event">
+
         <span>📍</span>
-        <h3>أول خروجة</h3>
+
+        <div class="date">
+          6/3/2026
+        </div>
+
+        <h3>
+          أول خروجة
+        </h3>
+
         <p>
-          واحدة من اللحظات اللي تستاهل تتحط في الذاكرة.
+          اول مسكه ايد و اول قعده بيني وبينك بجد واول ذكري تتعمل ما بينا وعمري ما هنساها
         </p>
+
       </div>
 
-      <div class="event">
-        <span>😂</span>
-        <h3>أول موقف ضحكنا فيه جامد</h3>
-        <p>
-          الموقف اللي كل ما نفتكره نضحك من جديد.
-        </p>
-      </div>
+
+      <!-- EVENT 4 -->
 
       <div class="event">
+
         <span>📸</span>
-        <h3>أول صورة</h3>
+
+        <div class="date">
+          ذكرى
+        </div>
+
+        <h3>
+          أول صورة
+        </h3>
+
+        <img
+          src="IMG-20260308-WA0020.jpg"
+          alt="Memory"
+          style="
+            width:100%;
+            max-height:380px;
+            object-fit:cover;
+            border-radius:18px;
+            margin-top:12px;
+          "
+        >
+
         <p>
           صورة بسيطة، بس بقت ذكرى.
         </p>
+
       </div>
 
+
+      <!-- EVENT 5 -->
+
       <div class="event">
+
         <span>⭐</span>
-        <h3>أجمل ذكرى</h3>
+
+        <h3>
+          أجمل ذكرى
+        </h3>
+
         <p>
-          ولسه في ذكريات كتير جاية...
+          يوم ما حضنتيني اول حضن ودي بالنسبه لي احلي ذكري بالنسبه لي مع ان اللي قبلها مكانش احسن حاجه خالص بس الحضن خلاها اجمل ذكري عدت عليا
         </p>
+
       </div>
+
 
     </div>
 
     <button onclick="showPage('photosPage')">
-      Photo Wall 📸
+      Next →
     </button>
 
   </div>
+
 </section>
 
 
 <!-- PHOTO WALL -->
 <section class="page" id="photosPage">
+
   <div class="card">
 
-    <h1>Photo Wall 📸</h1>
+    <h1>
+      Photo Wall 📸
+    </h1>
 
     <p>
       كل صورة هنا مكان لذكرى تستاهل تتشاف تاني.
@@ -317,106 +612,156 @@ button:hover{transform:scale(1.05)}
 
     <div class="photos">
 
+
       <div class="photo">
         <img src="IMG-20260308-WA0018.jpg" alt="Memory 1">
-        <p>اليوم ده كان من أحلى الأيام 🤍</p>
+        <p>
+          اول مره ننزل مع بعض وانا معترفلك بحبي اللي عمري ما ندمت عليه
+        </p>
       </div>
+
 
       <div class="photo">
         <img src="IMG-20260506-WA0080.jpg" alt="Memory 2">
-        <p>مش محتاج أقول حاجة... الصورة بتتكلم.</p>
+        <p>
+          كان و حاليا وهنكون دايما شكلنا لايق علي بعض
+        </p>
       </div>
+
 
       <div class="photo">
         <img src="IMG-20260606-WA0011.jpg" alt="Memory 3">
-        <p>ذكريات صغيرة، بس غالية.</p>
+        <p>
+          هنا انا وانتي دمج عادي بس بحب دماغنا التافهه
+        </p>
       </div>
+
 
       <div class="photo">
         <img src="IMG-20260607-WA0003.jpg" alt="Memory 4">
-        <p>One of my favorite memories 🤍</p>
+        <p>
+          يوم من احلي ايامي ابتدي كده
+        </p>
       </div>
+
 
       <div class="photo">
         <img src="IMG-20260607-WA0007.jpg" alt="Memory 5">
-        <p>لحظة تستاهل تفضل موجودة.</p>
+        <p>
+          وانتهي كده
+        </p>
       </div>
+
 
       <div class="photo">
         <img src="IMG-20260614-WA0004.jpg" alt="Memory 6">
-        <p>Some memories are simply special.</p>
+        <p>
+          ديت القصب العظيم
+        </p>
       </div>
+
 
       <div class="photo">
         <img src="IMG20260315025540.jpg" alt="Memory 7">
-        <p>تفصيلة صغيرة من حكاية كبيرة.</p>
+        <p>
+          اكتر وقت متأخر شوفتك فيه عشان كده معلقه معايا الصوره دي
+        </p>
       </div>
+
 
       <div class="photo">
         <img src="Snapchat-1409232718.jpg" alt="Memory 8">
-        <p>ضحكة وذكرى 🤍</p>
+        <p>
+          بحب الصوره دي وانتي متعرفيش اني بحبها اصلا
+        </p>
       </div>
+
 
       <div class="photo">
         <img src="Snapchat-1608804250.jpg" alt="Memory 9">
-        <p>And another memory to keep.</p>
+        <p>
+          اجمل واحلي وارق صوره لينا
+        </p>
       </div>
+
 
     </div>
 
     <button onclick="showPage('factsPage')">
-      حاجات يمكن متعرفيهاش 💭
+      Next →
     </button>
 
   </div>
+
 </section>
 
 
 <!-- FACTS -->
 <section class="page" id="factsPage">
+
   <div class="card">
 
-    <h1>حاجات يمكن متعرفيهاش 💭</h1>
+    <h1>
+      حاجات يمكن متعرفيهاش 💭
+    </h1>
+
 
     <div class="fact">
-      يمكن مش بقولها كتير، بس وجودك بيفرق 🤍
+      انا محبتش ولا بحب ولا عمري هحب حد قدك يا duzziiiii
     </div>
 
-    <div class="fact">
-      أكتر حاجة بتضحكني فيكي إنك بتعرفي تخلي أبسط حاجة funny 😂
-    </div>
 
     <div class="fact">
-      في ذكريات معينة كل ما أفتكرها بلاقي نفسي بابتسم.
+      انا اسف لو كنت عملت اي حاجه ضايقتك مني الفتره اللي عدت كلها
     </div>
 
-    <div class="fact">
-      ساعات التفاصيل الصغيرة بتفضل أكتر من الحاجات الكبيرة.
-    </div>
 
     <div class="fact">
-      I'm glad you became part of these memories.
+      كل سنه وانتي طيبه يا نور عين zuzzi ويارب عمرنا الجاي كله نبقي مع بعض و ف حضن بعض يا حياتي
     </div>
+
+
+    <div class="fact">
+      رينا يخليكي ليا وميحرمنيش منك ابدا
+    </div>
+
+
+    <div class="fact">
+      هتفضلي bad kisser بس مش ازمه ان شاء الله تتطوري يعني
+    </div>
+
+
+    <div class="fact">
+      I'll always love you as much as the first day i admitted that i love you
+    </div>
+
 
     <div class="fact">
       يمكن الكلام ده بسيط، بس هو حقيقي.
     </div>
 
+
     <button onclick="showPage('endingPage')">
-      النهاية ❤️
+      Next →
     </button>
 
   </div>
+
 </section>
 
 
 <!-- END -->
 <section class="page" id="endingPage">
+
   <div class="card">
 
-    <div class="heart">❤️</div>
+    <div class="heart">
+      ❤️
+    </div>
 
-    <h1>وصلنا للنهاية...</h1>
+    <h1>
+      وصلنا للنهاية...
+    </h1>
 
     <div class="final-message">
 
@@ -432,22 +777,39 @@ button:hover{transform:scale(1.05)}
 
     </div>
 
+
     <button onclick="surprise()">
       لسه مخلصناش... 👀
     </button>
 
+
     <p id="surpriseText"></p>
 
+
+    <button
+      id="restartButton"
+      class="restart"
+      onclick="restartJourney()"
+      style="display:none;"
+    >
+      live again with the journey
+    </button>
+
   </div>
+
 </section>
 
 
 <script>
 
+/* PAGE NAVIGATION */
+
 function showPage(id){
 
   document.querySelectorAll(".page").forEach(function(page){
+
     page.classList.remove("active");
+
   });
 
   document.getElementById(id).classList.add("active");
@@ -456,8 +818,11 @@ function showPage(id){
     top:0,
     behavior:"smooth"
   });
+
 }
 
+
+/* PASSWORD */
 
 function checkPassword(){
 
@@ -465,6 +830,8 @@ function checkPassword(){
     document.getElementById("password").value.trim();
 
   if(password.toLowerCase() === "only duzzi"){
+
+    document.getElementById("error").textContent = "";
 
     showPage("startPage");
 
@@ -474,17 +841,22 @@ function checkPassword(){
       "الباسوورد غلط... جربي تاني 🤍";
 
   }
+
 }
 
+
+/* COUNTER */
 
 function updateCounter(){
 
   const start =
     new Date("2026-03-03T00:00:00");
 
-  const now = new Date();
+  const now =
+    new Date();
 
-  const diff = now - start;
+  const diff =
+    now - start;
 
   if(diff < 0){
 
@@ -492,39 +864,65 @@ function updateCounter(){
       "البداية لسه جاية 🤍";
 
     return;
+
   }
 
   const days =
-    Math.floor(diff / (1000*60*60*24));
+    Math.floor(diff/(1000*60*60*24));
 
   const hours =
-    Math.floor((diff / (1000*60*60)) % 24);
+    Math.floor((diff/(1000*60*60))%24);
 
   const minutes =
-    Math.floor((diff / (1000*60)) % 60);
+    Math.floor((diff/(1000*60))%60);
 
   const seconds =
-    Math.floor((diff / 1000) % 60);
+    Math.floor((diff/1000)%60);
 
   document.getElementById("counter").textContent =
     `${days} يوم • ${hours} ساعة • ${minutes} دقيقة • ${seconds} ثانية`;
+
 }
 
 
 setInterval(updateCounter,1000);
+
 updateCounter();
 
+
+/* FINAL SURPRISE */
 
 function surprise(){
 
   document.getElementById("surpriseText").innerHTML =
     "بصراحة... 🤍<br><br>" +
-    "دي مش النهاية أصلًا 😂❤️<br><br>" +
+    "دي مش النهاية أصلًا ❤️<br><br>" +
     "لسه في ذكريات كتير مستنيانا.";
+
+  document.getElementById("restartButton").style.display =
+    "inline-block";
+
+}
+
+
+/* RESTART */
+
+function restartJourney(){
+
+  document.getElementById("password").value = "";
+
+  document.getElementById("error").textContent = "";
+
+  document.getElementById("surpriseText").innerHTML = "";
+
+  document.getElementById("restartButton").style.display =
+    "none";
+
+  showPage("passwordPage");
 
 }
 
 </script>
 
 </body>
-</html>
+  </html>

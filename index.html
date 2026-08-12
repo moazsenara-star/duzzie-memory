@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duzzie 🤍</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #fff5f7, #f8f0ff);
+  color: #3b3035;
+  text-align: center;
+}
+
+.page {
+  min-height: 100vh;
+  display: none;
+  padding: 35px 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.page.active {
+  display: flex;
+}
+
+.card {
+  width: min(900px, 95%);
+  background: rgba(255,255,255,.8);
+  padding: 30px;
+  border-radius: 28px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.08);
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+button {
+  border: none;
+  background: #d88ca2;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 17px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: .3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+input {
+  width: min(330px, 90%);
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 17px;
+  outline: none;
+}
+
+.error {
+  color: #c44;
+  margin-top: 12px;
+}
+
+.timeline {
+  text-align: right;
+  margin-top: 25px;
+}
+
+.event {
+  background: #fff;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 20px;
+  box-shadow: 0 7px 20px rgba(0,0,0,.06);
+}
+
+.event span {
+  font-size: 25px;
+}
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.photo {
+  background: white;
+  padding: 12px 12px 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  transform: rotate(-2deg);
+}
+
+.photo:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.photo-box {
+  height: 180px;
+  background: linear-gradient(135deg, #f6d9e1, #e8d9f5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #806b73;
+  font-size: 45px;
+}
+
+.photo p {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+.facts {
+  text-align: right;
+}
+
+.fact {
+  background: white;
+  padding: 18px;
+  margin: 12px 0;
+  border-radius: 18px;
+}
+
+#counter {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.small {
+  opacity: .7;
+  font-size: 14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<section class="page active" id="passwordPage">
+  <div class="card">
+    <div style="font-size:60px;">🔐</div>
+    <h1>Duzzie 🤍</h1>
+    <p>المكان ده معمول لشخص واحد بس...</p>
+
+    <input id="password" type="password" placeholder="Enter password">
+
+    <br>
+
+    <button onclick="checkPassword()">Open 🤍</button>
+
+    <div id="error" class="error"></div>
+  </div>
+</section>
+
+
+<!-- START -->
+<section class="page" id="startPage">
+  <div class="card">
+    <div style="font-size:70px;">🎁</div>
+
+    <h1>في حاجة صغيرة عملتها مخصوص ليكي...</h1>
+
+    <p>
+      مش عارف هتضحكي ولا هتستغربي 😂<br>
+      بس أتمنى إن الرحلة دي تعجبك.
+    </p>
+
+    <button onclick="showPage('introPage')">
+      ابدئي الرحلة 🤍
+    </button>
+  </div>
+</section>
+
+
+<!-- INTRO -->
+<section class="page" id="introPage">
+  <div class="card">
+
+    <div style="font-size:65px;">🤍</div>
+
+    <h2>لو وصلتي لهنا...</h2>
+
+    <p>
+      يبقى عندي شوية حاجات عايز أفتكرك بيها.
+      <br>
+      حاجات صغيرة، بس ليها معنى كبير عندي.
+    </p>
+
+    <div id="counter"></div>
+
+    <p class="small">
+      من 3 / 3 / 2026 🤍
+    </p>
+
+    <button onclick="showPage('timelinePage')">
+      Our Timeline 🕰️
+    </button>
+
+  </div>
+</section>
+
+
+<!-- TIMELINE -->
+<section class="page" id="timelinePage">
+  <div class="card">
+
+    <h1>Our Timeline 🕰️</h1>
+
+    <div class="timeline">
+
+      <div class="event">
+        <span>📅</span>
+        <h3>أول مرة اتكلمنا</h3>
+        <p>يمكن وقتها مكنّاش نعرف إن الكلام ده هيبقى له معنى بعدين.</p>
+      </div>
+
+      <div class="event">
+        <span>📍</span>
+        <h3>أول خروجة</h3>
+        <p>واحدة من اللحظات اللي تستاهل تتحط في الذاكرة.</p>
+      </div>
+
+      <div class="event">
+        <span>😂</span>
+        <h3>أول موقف ضحكنا فيه جامد</h3>
+        <p>الموقف اللي كل ما نفتكره نضحك من جديد.</p>
+      </div>
+
+      <div class="event">
+        <span>📸</span>
+        <h3>أول صورة</h3>
+        <p>صورة بسيطة، بس بقت ذكرى.</p>
+      </div>
+
+      <div class="event">
+        <span>⭐</span>
+        <h3>أجمل ذكرى</h3>
+        <p>لسه في ذكريات كتير جاية...</p>
+      </div>
+
+    </div>
+
+    <button onclick="showPage('photosPage')">
+      Photo Wall 📸
+    </button>
+
+  </div>
+</section>
+
+
+<!-- PHOTOS -->
+<section class="page" id="photosPage">
+  <div class="card">
+
+    <h1>Photo Wall 📸</h1>
+
+    <p>
+      كل صورة هنا مكان لذكرى تستاهل تتشاف تاني.
+    </p>
+
+    <div class="photos">
+
+      <div class="photo">
+        <div class="photo-box">📷</div>
+        <p>اليوم ده كان من أحلى الأيام.</p>
+      </div>
+
+      <div class="photo">
+        <div class="photo-box">📷</div>
+        <p>مش محتاج أقول حاجة... الصورة بتتكلم.</p>
+      </div>
+
+      <div class="photo">
+        <div class="photo-box">📷</div>
+        <p>ذكريات صغيرة، بس غالية.</p>
+      </div>
+
+      <div class="photo">
+        <div class="photo-box">📷</div>
+        <p>One of my favorite memories 🤍</p>
+      </div>
+
+    </div>
+
+    <button onclick="showPage('factsPage')">
+      حاجات يمكن متعرفيهاش 💭
+    </button>
+
+  </div>
+</section>
+
+
+<!-- FACTS -->
+<section class="page" id="factsPage">
+  <div class="card">
+
+    <h1>حاجات يمكن متعرفيهاش 💭</h1>
+
+    <div class="facts">
+
+      <div class="fact">
+        يمكن مش بقولها كتير، بس وجودك بيفرق.
+      </div>
+
+      <div class="fact">
+        أكتر حاجة بتضحكني فيكي إنك بتعرفي تخلي أبسط حاجة funny.
+      </div>
+
+      <div class="fact">
+        في ذكريات معينة كل ما أفتكرها بلاقي نفسي بابتسم.
+      </div>
+
+      <div class="fact">
+        ساعات التفاصيل الصغيرة بتفضل أكتر من الحاجات الكبيرة.
+      </div>
+
+      <div class="fact">
+        And honestly... I'm glad you became part of my memories.
+      </div>
+
+      <div class="fact">
+        يمكن الكلام ده بسيط، بس هو حقيقي.
+      </div>
+
+    </div>
+
+    <button onclick="showPage('endingPage')">
+      النهاية ❤️
+    </button>
+
+  </div>
+</section>
+
+
+<!-- END -->
+<section class="page" id="endingPage">
+  <div class="card">
+
+    <div style="font-size:80px;">❤️</div>
+
+    <h1>وصلنا للنهاية...</h1>
+
+    <p>
+      بس لو هتسأليني إيه أحلى حاجة في الرحلة دي؟
+    </p>
+
+    <p>
+      إن كل الذكريات دي حصلت فعلًا.
+      <br>
+      وإن لسه في حاجات كتير ممكن نعيشها.
+    </p>
+
+    <button onclick="surprise()">
+      لسه مخلصناش... 👀
+    </button>
+
+    <p id="surpriseText"></p>
+
+  </div>
+</section>
+
+
+<script>
+
+function showPage(id) {
+
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  document.getElementById(id).classList.add('active');
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+
+function checkPassword() {
+
+  const password = document.getElementById('password').value.trim();
+
+  if (password.toLowerCase() === "only duzzi") {
+
+    showPage('startPage');
+
+  } else {
+
+    document.getElementById('error').textContent =
+      "الباسوورد غلط... جربي تاني 🤍";
+
+  }
+}
+
+
+function updateCounter() {
+
+  const start = new Date("2026-03-03T00:00:00");
+  const now = new Date();
+
+  let diff = now - start;
+
+  if (diff < 0) {
+    document.getElementById("counter").textContent =
+      "لسه البداية جاية 🤍";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+  const hours = Math.floor(
+    (diff / (1000 * 60 * 60)) % 24
+  );
+
+  const minutes = Math.floor(
+    (diff / (1000 * 60)) % 60
+  );
+
+  const seconds = Math.floor(
+    (diff / 1000) % 60
+  );
+
+  document.getElementById("counter").textContent =
+    `${days} يوم • ${hours} ساعة • ${minutes} دقيقة • ${seconds} ثانية`;
+}
+
+
+setInterval(updateCounter, 1000);
+updateCounter();
+
+
+function surprise() {
+
+  document.getElementById("surpriseText").innerHTML =
+    "بصراحة... <br><br>دي مش النهاية أصلًا 😂❤️<br><br>" +
+    "لسه في ذكريات كتير مستنيانا.";
+
+}
+
+</script>
+
+</body>
+  </html>
